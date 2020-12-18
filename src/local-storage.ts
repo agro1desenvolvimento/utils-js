@@ -1,6 +1,6 @@
 class LocalStorage<T extends Record<keyof any, unknown>> {
   constructor(
-    parseToString: (v: T[keyof T]) => string,
+    parseToString?: (v: T[keyof T]) => string,
     parseToJSON?: <K extends keyof T>(value: string | null) => T[K] | null,
   ) {
     if (parseToString) this.parseToString = parseToString;
