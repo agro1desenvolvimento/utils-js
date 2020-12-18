@@ -1,7 +1,7 @@
-import keysToSnakeCase from './keys-to-snake-case';
-import keysToSnakeCaseDeep from './keys-to-snake-case-deep';
+import keysToCamelCase from './keys-to-camel-case';
+import keysToCamelCaseDeep from './keys-to-camel-case-deep';
 
 export {
-  keysToSnakeCase,
-  keysToSnakeCaseDeep,
+  keysToCamelCase,
+  keysToCamelCaseDeep,
 };
