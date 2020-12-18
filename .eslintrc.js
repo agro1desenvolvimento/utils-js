@@ -24,6 +24,7 @@ module.exports = {
   },
   rules: {
     'no-undef': 'off',
+    'no-unused-vars': 'off',
     'no-use-before-define': 'off',
     'consistent-return': 'off',
 
@@ -32,5 +33,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };

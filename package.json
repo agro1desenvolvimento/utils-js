@@ -1,6 +1,6 @@
 {
   "name": "@agro1desenvolvimento/utils-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "main": "dist/esnext/index.js",
   "types": "dist/esnext/index.d.ts",
@@ -8,7 +8,7 @@
   "author": "agro1desenvolvimento",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint src --ext .js,.ts",
     "build": "tsc"
   },
   "engines": {
