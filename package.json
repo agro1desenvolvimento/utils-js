@@ -1,6 +1,6 @@
 {
   "name": "@agro1desenvolvimento/utils-js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": false,
   "main": "dist/esnext/index.js",
   "types": "dist/esnext/index.d.ts",
@@ -12,7 +12,7 @@
     "build": "tsc"
   },
   "engines": {
-    "node": "14"
+    "node": ">=12 <=14"
   },
   "publishConfig": {
     "access": "public"
