@@ -1,10 +1,8 @@
-import { snakeCase } from 'lodash';
+import { isString, snakeCase } from 'lodash';
+import mapDeep from './map-deep';
 
 const keysToSnakeCaseDeep = <T extends Record<keyof any, any>>(data: Record<keyof any, any>) => (
-  Object.entries(data).reduce<Record<keyof any, any>>((acc, [key, value]) => {
-    acc[snakeCase(key)] = typeof value === 'object' && value !== null ? keysToSnakeCaseDeep(value) : value;
-    return acc;
-  }, Array.isArray(data) ? [] : {}) as T
+  mapDeep<T>(data, (_value, key) => ({ key: (isString(key) ? snakeCase(key) : key) }))
 );
 
 export default keysToSnakeCaseDeep;
