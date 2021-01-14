@@ -1,19 +1,57 @@
 import { keysToCamelCaseDeep } from '../src/index';
 
-test('keys should be in camel case', () =>{
-  const fakeData = keysToCamelCaseDeep({ 
-    snake_case: {
-      more_snake: {
-        even_more_snake: true
-      }
-    }
+describe('keys To snake case', () => {
+  describe('should convert', () => {
+    it('simple object', () => {
+      const fakeData = keysToCamelCaseDeep({ camel_case: true });
+
+      expect(fakeData).toEqual({ camelCase: true });
+    });
+
+    it('should convert all keys', () => {
+      const fakeData = keysToCamelCaseDeep({
+        camel_case:
+        { camel_case_test: '' },
+      });
+
+      expect(fakeData).toEqual({
+        camelCase:
+        { camelCaseTest: '' },
+      });
+    });
+
+    it('should convert all keys inside the array', () => {
+      const fakeData = keysToCamelCaseDeep({
+        camel_case: [
+          { camel_case_test: '' },
+        ],
+      });
+
+      expect(fakeData).toEqual({
+        camelCase: [
+          { camelCaseTest: '' },
+        ],
+      });
+    });
   });
 
-  expect(fakeData).toEqual({ 
-    snakeCase: {
-      moreSnake: {
-        evenMoreSnake: true
-      }
-    }
+  describe('should not convert', () => {
+    it('empty object', () => {
+      const fakeData = keysToCamelCaseDeep({});
+
+      expect(fakeData).toEqual({});
+    });
+
+    it('empty array', () => {
+      const fakeData = keysToCamelCaseDeep([]);
+
+      expect(fakeData).toEqual([]);
+    });
+
+    it('should leave the object as it is', () => {
+      const fakeData = keysToCamelCaseDeep([{ key: [{ keyDeep: 'v' }] }]);
+
+      expect(fakeData).toEqual([{ key: [{ keyDeep: 'v' }] }]);
+    });
   });
 });
