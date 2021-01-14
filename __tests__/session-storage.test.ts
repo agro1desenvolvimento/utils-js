@@ -7,8 +7,19 @@ const VALUE = 'bar';
 describe('sessionStorage', () => {
   describe('setItem', () => {
     it('should save to sessionStorage', () => {
+      // @ts-expect-error
+      const spyParseToString = jest.spyOn(sessionStorage, 'parseToString');
+      // @ts-expect-error
+      const spyParseToJSON = jest.spyOn(sessionStorage, 'parseToJSON');
+
       sessionStorage.setItem(KEY, VALUE);
       expect(sessionStorage.getItem(KEY)).toBe(VALUE);
+      expect(spyParseToString).toBeCalledTimes(1);
+      expect(spyParseToJSON).toBeCalledTimes(1);
+    });
+
+    it('should get the length', () => {
+      expect(sessionStorage.length).toEqual(1);
     });
 
     it('should get all keys', () => {
@@ -18,6 +29,13 @@ describe('sessionStorage', () => {
     it('should remove the key', () => {
       sessionStorage.removeItem(KEY);
       expect(Object.keys(sessionStorage.getAllKeys()).length).toBe(0);
+    });
+
+    it('should clear', () => {
+      sessionStorage.setItem(KEY, VALUE);
+      expect(sessionStorage.getItem(KEY)).toBe(VALUE);
+      sessionStorage.clear();
+      expect(sessionStorage.length).toEqual(0);
     });
 
     it('should parse to String', () => {

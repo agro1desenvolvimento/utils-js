@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 class LocalStorage<T extends Record<keyof any, unknown>> {
   constructor(
     parseToString?: (v: T[keyof T]) => string,
@@ -19,9 +20,13 @@ class LocalStorage<T extends Record<keyof any, unknown>> {
     }
   }
 
-  clear = localStorage.clear;
+  clear() {
+    localStorage.clear();
+  }
 
-  length = localStorage.length;
+  get length() {
+    return localStorage.length;
+  }
 
   getAllKeys = () => Object.keys(localStorage) as (keyof T)[];
 

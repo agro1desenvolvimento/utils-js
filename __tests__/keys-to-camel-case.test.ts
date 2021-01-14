@@ -30,10 +30,10 @@ describe('keys To snake case', () => {
       expect(fakeData).toEqual({});
     });
 
-    // it('should do nothing', () => {
-    //   const fakeData = keysToCamelCase([]);
+    it('should do nothing', () => {
+      const fakeData = keysToCamelCase([]);
 
-    //   expect(fakeData).toEqual([]);
-    // })
+      expect(fakeData).toEqual([]);
+    });
   });
 });

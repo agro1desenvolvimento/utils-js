@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 class SessionStorage<T extends Record<keyof any, unknown>> {
   constructor(
     parseToString?: (v: T[keyof T]) => string,
@@ -19,9 +20,13 @@ class SessionStorage<T extends Record<keyof any, unknown>> {
     }
   }
 
-  clear = sessionStorage.clear;
+  clear() {
+    sessionStorage.clear();
+  }
 
-  length = sessionStorage.length;
+  get length() {
+    return sessionStorage.length;
+  }
 
   getAllKeys = () => Object.keys(sessionStorage) as (keyof T)[];
 
