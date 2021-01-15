@@ -19,9 +19,13 @@ class LocalStorage<T extends Record<keyof any, unknown>> {
     }
   }
 
-  clear = localStorage.clear;
+  clear() {
+    localStorage.clear();
+  }
 
-  length = localStorage.length;
+  get length() {
+    return localStorage.length;
+  }
 
   getAllKeys = () => Object.keys(localStorage) as (keyof T)[];
 

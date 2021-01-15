@@ -19,9 +19,13 @@ class SessionStorage<T extends Record<keyof any, unknown>> {
     }
   }
 
-  clear = sessionStorage.clear;
+  clear() {
+    sessionStorage.clear();
+  }
 
-  length = sessionStorage.length;
+  get length() {
+    return sessionStorage.length;
+  }
 
   getAllKeys = () => Object.keys(sessionStorage) as (keyof T)[];
 
