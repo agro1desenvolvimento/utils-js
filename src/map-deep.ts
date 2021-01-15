@@ -9,13 +9,13 @@ const mapDeep = <T extends Record<keyof any, any>>(
 ): T => reduce<typeof object, Record<keyof any, any>>(
   object,
   (acc, currentValue, currentKey) => {
-    const {
-      value = currentValue,
-      key = currentKey,
-    } = callback(currentValue, currentKey, acc) || {};
+    const callbackReturn = callback(currentValue, currentKey, acc) || {};
+    let value = currentValue;
+    let key = currentKey;
 
-    // https://github.com/microsoft/TypeScript/issues/1863
-    // @ts-expect-error
+    if ('value' in callbackReturn) value = callbackReturn.value;
+    if ('key' in callbackReturn) key = callbackReturn.key as typeof key;
+
     acc[key] = deep > 0 && isIterable(value)
       ? mapDeep(value, callback, deep - 1)
       : value;
@@ -30,4 +30,4 @@ type MapDeepCallbackType = (
   value: any,
   key: keyof any,
   target: Record<keyof any, any>,
-) => { key?: keyof any; value?: any } | void;
+) => { key?: keyof any; value?: any } | undefined;
