@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 class LocalStorage<T extends Record<keyof any, unknown>> {
   constructor(
     parseToString?: (v: T[keyof T]) => string,

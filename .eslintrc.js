@@ -27,6 +27,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-use-before-define': 'off',
     'consistent-return': 'off',
+    'class-methods-use-this': 'off',
 
     'import/extensions': 'off',
 
