@@ -1,9 +1,9 @@
 {
   "name": "@agro1desenvolvimento/utils-js",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "private": false,
-  "main": "dist/esnext/index.js",
-  "types": "dist/esnext/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "git@github.com:agro1desenvolvimento/utils-js.git",
   "author": "agro1desenvolvimento",
   "license": "MIT",
