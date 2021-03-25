@@ -5,6 +5,7 @@ import LocalStorage from './local-storage';
 import keysToSnakeCase from './keys-to-snake-case';
 import keysToSnakeCaseDeep from './keys-to-snake-case-deep';
 import mapDeep from './map-deep';
+import getScreenSizeClassification from './get-screen-size-classification';
 
 export {
   keysToCamelCase,
@@ -14,4 +15,5 @@ export {
   keysToSnakeCase,
   keysToSnakeCaseDeep,
   mapDeep,
+  getScreenSizeClassification,
 };

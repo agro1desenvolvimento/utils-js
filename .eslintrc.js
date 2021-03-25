@@ -28,6 +28,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
+    'no-shadow': 'off',
 
     'import/extensions': 'off',
 
@@ -35,5 +36,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-shadow': ['error'],
   },
 };
