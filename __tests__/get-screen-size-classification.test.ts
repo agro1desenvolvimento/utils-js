@@ -21,8 +21,8 @@ const validate = (data: { min: number, max: number, classification: string }) =>
 };
 
 describe('get-screen-size-classification', () => {
-  describe('es', () => {
-    validate({ min: 0, max: 575, classification: 'es' });
+  describe('xs', () => {
+    validate({ min: 0, max: 575, classification: 'xs' });
   });
 
   describe('sm', () => {
