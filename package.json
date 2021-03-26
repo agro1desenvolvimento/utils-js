@@ -1,6 +1,6 @@
 {
   "name": "@agro1desenvolvimento/utils-js",
-  "version": "1.0.10",
+  "version": "1.0.2",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
