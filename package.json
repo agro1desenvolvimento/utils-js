@@ -13,6 +13,7 @@
     "build:js": "babel src --out-dir dist --extensions '.ts'",
     "build:types": "tsc --emitDeclarationOnly",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "types-check": "tsc --noEmit"
   },
   "engines": {

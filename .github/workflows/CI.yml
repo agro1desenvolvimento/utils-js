@@ -83,4 +83,4 @@ jobs:
     - name: Test javascript
       env:
         PACKAGES_GITHUB_TOKEN: ${{ secrets.PACKAGES_GITHUB_TOKEN }}
-      run:  yarn test
+      run:  yarn test:coverage
