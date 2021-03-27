@@ -38,6 +38,10 @@ describe('get-screen-size-classification', () => {
   });
 
   describe('xl', () => {
-    validate({ min: 1200, max: Infinity, classification: 'xl' });
+    validate({ min: 1200, max: 1399, classification: 'xl' });
+  });
+
+  describe('xxl', () => {
+    validate({ min: 1400, max: Infinity, classification: 'xxl' });
   });
 });
