@@ -6,6 +6,7 @@ export { default as keysToSnakeCase } from './keys-to-snake-case';
 export { default as keysToSnakeCaseDeep } from './keys-to-snake-case-deep';
 export { default as mapDeep } from './map-deep';
 export { default as isMobile } from './is-mobile';
+export { default as formatNumber } from './format-number';
 
 export {
   default as getScreenSizeClassification,
