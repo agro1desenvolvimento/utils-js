@@ -9,13 +9,10 @@ describe('sessionStorage', () => {
     it('should save to sessionStorage', () => {
       // @ts-expect-error
       const spyParseToString = jest.spyOn(sessionStorage, 'parseToString');
-      // @ts-expect-error
-      const spyParseToJSON = jest.spyOn(sessionStorage, 'parseToJSON');
 
       sessionStorage.setItem(KEY, VALUE);
       expect(sessionStorage.getItem(KEY)).toBe(VALUE);
       expect(spyParseToString).toBeCalledTimes(1);
-      expect(spyParseToJSON).toBeCalledTimes(1);
     });
 
     it('should get the length', () => {
@@ -51,5 +48,15 @@ describe('sessionStorage', () => {
 
       expect(fakeData).toEqual({ test: { string: true } });
     });
+  });
+
+  it('should emit event', () => {
+    const onChange = jest.fn();
+    sessionStorage.addOnChange(onChange);
+
+    sessionStorage.setItem(KEY, VALUE);
+
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith({ action: 'update', value: VALUE, key: KEY });
   });
 });

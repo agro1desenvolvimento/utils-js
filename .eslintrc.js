@@ -29,6 +29,7 @@ module.exports = {
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
     'no-shadow': 'off',
+    'no-dupe-class-members': 'off',
 
     'import/extensions': 'off',
 
