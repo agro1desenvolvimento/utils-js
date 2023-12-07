@@ -17,3 +17,11 @@ export {
   default as getDeviceTypeByScreen,
   devicesTypes,
 } from './get-device-type-by-screen';
+
+export {
+  default as EventsManager,
+  EventCallbackBase,
+  EventListBase,
+  EventOnEmit,
+  EventOnEmitData,
+} from './events-manager';

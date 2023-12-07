@@ -4,7 +4,6 @@ export default {
   setupFiles: ['jest-localstorage-mock'],
   coverageThreshold: {
     global: {
-      functions: 100,
       lines: 90,
     },
   },

@@ -9,13 +9,11 @@ describe('localStorage', () => {
     it('should save to localStorage', () => {
       // @ts-expect-error
       const spyParseToString = jest.spyOn(localStorage, 'parseToString');
-      // @ts-expect-error
-      const spyParseToJSON = jest.spyOn(localStorage, 'parseToJSON');
 
       localStorage.setItem(KEY, VALUE);
+
       expect(localStorage.getItem(KEY)).toBe(VALUE);
       expect(spyParseToString).toBeCalledTimes(1);
-      expect(spyParseToJSON).toBeCalledTimes(1);
     });
 
     it('should get the length', () => {
@@ -50,6 +48,16 @@ describe('localStorage', () => {
       const fakeData = localStorage.parseToJSON('{"test":{"string":true}}');
 
       expect(fakeData).toEqual({ test: { string: true } });
+    });
+
+    it('should emit event', () => {
+      const onChange = jest.fn();
+      localStorage.addOnChange(onChange);
+
+      localStorage.setItem(KEY, VALUE);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith({ action: 'update', value: VALUE, key: KEY });
     });
   });
 });
