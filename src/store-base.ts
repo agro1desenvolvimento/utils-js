@@ -1,8 +1,12 @@
 import EventsManager, { EventCallbackBase } from './events-manager';
 
-const STORAGES = {
-  session: sessionStorage,
-  local: localStorage,
+const getStorage = (storage: StorageType) => {
+  if (typeof window === 'undefined') return undefined;
+
+  if (storage === 'local') return window.localStorage;
+  if (storage === 'session') return window.sessionStorage;
+
+  return undefined;
 };
 
 type EventOnChangeBySet<T> = {
@@ -32,7 +36,11 @@ class StorageBase<T extends Record<string, any>> {
     if (parseToString) this.parseToString = parseToString;
     if (parseToJSON) this.parseToJSON = parseToJSON;
 
-    this.storage = STORAGES[type];
+    const storage = getStorage(type);
+
+    if (!storage) throw new Error(`${type} storage unavailable.`);
+
+    this.storage = storage;
   }
 
   get length() {
@@ -139,7 +147,7 @@ class StorageBase<T extends Record<string, any>> {
 
 export type OnStorageChange<T extends Record<string, unknown>> = EventCallbackBase<Events<T>, 'onChange'>
 
-export type StorageType = keyof typeof STORAGES
+export type StorageType = 'session' | 'local'
 export type ParseToString<T> = (v: T[keyof T]) => string
 export type ParseToJSON<T> = <K extends keyof T>(value: string | null) => T[K] | null
 
