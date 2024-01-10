@@ -30,7 +30,13 @@ type Events<T extends Record<string, any>> = {
 class StorageBase<T extends Record<string, any>> {
   private readonly eventsManager = new EventsManager<Events<T>>()
 
-  protected readonly storage: Storage;
+  readonly #storage: Storage | undefined;
+
+  protected get storage() {
+    if (!this.#storage) throw new Error('Storage unavailable.');
+
+    return this.#storage;
+  }
 
   constructor({ type, parseToJSON, parseToString }: StorageBaseConstructorParam<T>) {
     if (parseToString) this.parseToString = parseToString;
@@ -38,9 +44,7 @@ class StorageBase<T extends Record<string, any>> {
 
     const storage = getStorage(type);
 
-    if (!storage) throw new Error(`${type} storage unavailable.`);
-
-    this.storage = storage;
+    this.#storage = storage;
   }
 
   get length() {
