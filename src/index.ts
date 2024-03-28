@@ -25,3 +25,9 @@ export {
   EventOnEmit,
   EventOnEmitData,
 } from './events-manager';
+
+export {
+  ParseToJSON,
+  ParseToString,
+  OnStorageChange,
+} from './store-base';

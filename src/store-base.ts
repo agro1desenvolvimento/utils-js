@@ -28,6 +28,18 @@ type Events<T extends Record<string, any>> = {
 }
 
 class StorageBase<T extends Record<string, any>> {
+  static readonly defaultParseToString: ParseToString = (value) => JSON.stringify(value)
+
+  static readonly defaultParseToJSON: ParseToJSON = (value) => {
+    try {
+      if (typeof value === 'string') return JSON.parse(value);
+
+      return value;
+    } catch (error) {
+      return value;
+    }
+  }
+
   private readonly eventsManager = new EventsManager<Events<T>>()
 
   readonly #storage: Storage | undefined;
@@ -38,9 +50,9 @@ class StorageBase<T extends Record<string, any>> {
     return this.#storage;
   }
 
-  constructor({ type, parseToJSON, parseToString }: StorageBaseConstructorParam<T>) {
-    if (parseToString) this.parseToString = parseToString;
-    if (parseToJSON) this.parseToJSON = parseToJSON;
+  constructor({ type, parseToJSON, parseToString }: StorageBaseConstructorParam) {
+    this.parseToString = parseToString || StorageBase.defaultParseToString;
+    this.parseToJSON = parseToJSON || StorageBase.defaultParseToJSON;
 
     const storage = getStorage(type);
 
@@ -58,14 +70,14 @@ class StorageBase<T extends Record<string, any>> {
 
   getAllKeys = () => Object.keys(this.storage) as (keyof T)[];
 
-  getItem<K extends keyof T>(key: K) {
+  getItem<K extends Extract<keyof T, string>>(key: K) {
     const value = this.storage.getItem(key.toString());
 
-    return this.parseToJSON<K>(value);
+    return this.parseToJSON(value, key) as T[K] | null;
   }
 
-  setItem<K extends keyof T>(key: K, value: T[K]) {
-    const newValue = this.parseToString(value);
+  setItem<K extends Extract<keyof T, string>>(key: K, value: T[K]) {
+    const newValue = this.parseToString(value, key);
     const currentValue = this.storage.getItem(key.toString());
 
     if (currentValue === newValue) return;
@@ -99,17 +111,9 @@ class StorageBase<T extends Record<string, any>> {
     this.updateNativeStorageListener();
   }
 
-  private parseToString = JSON.stringify;
+  private parseToString: ParseToString ;
 
-  private parseToJSON: ParseToJSON<T> = (value) => {
-    try {
-      if (typeof value === 'string') return JSON.parse(value);
-
-      return value;
-    } catch (error) {
-      return value;
-    }
-  }
+  private parseToJSON: ParseToJSON
 
   private emitOnChange(action: 'update', key: keyof T): void
 
@@ -152,13 +156,13 @@ class StorageBase<T extends Record<string, any>> {
 export type OnStorageChange<T extends Record<string, unknown>> = EventCallbackBase<Events<T>, 'onChange'>
 
 export type StorageType = 'session' | 'local'
-export type ParseToString<T> = (v: T[keyof T]) => string
-export type ParseToJSON<T> = <K extends keyof T>(value: string | null) => T[K] | null
+export type ParseToString = (value: unknown, key: string) => string
+export type ParseToJSON = (value: string | null, key: string) => unknown
 
-export type StorageBaseConstructorParam<T extends Record<string, unknown>> = {
+export type StorageBaseConstructorParam = {
   type: StorageType,
-  parseToString?: ParseToString<T>,
-  parseToJSON?: ParseToJSON<T>,
+  parseToString?: ParseToString,
+  parseToJSON?: ParseToJSON,
 }
 
 export default StorageBase;
